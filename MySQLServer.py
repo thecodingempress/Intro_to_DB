@@ -8,9 +8,12 @@ alx_db = mysql.connector.connect (
 )
 alx_cursor = alx_db.cursor()
 
-if alx_cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store"):
+try: 
+    alx_cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
     print ("Database 'alx_book_store' created successfully!")
-print ("Failed to create database alx_book_store")
+except:
+    mysql.connector.Error
+    print ("Failed to create database alx_book_store")
 
 alx_cursor.close()
 alx_db.close()
