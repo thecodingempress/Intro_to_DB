@@ -1,19 +1,19 @@
 import mysql.connector
+from mysql.connector import Error
 
-alx_db = mysql.connector.connect (
+try:
+    alx_db = mysql.connector.connect (
     host = "localhost",
     user = "root",
     password = "01100110",
-    database = "alx_book_store"
-)
-alx_cursor = alx_db.cursor()
-
-try: 
+    )
+    alx_cursor = alx_db.cursor()
     alx_cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
     print ("Database 'alx_book_store' created successfully!")
-except:
-    mysql.connector.Error
-    print ("Failed to create database alx_book_store")
-
-alx_cursor.close()
-alx_db.close()
+except Error as e:
+    print (f"Error: {e}")
+except Exception as e:
+    print ("Failed to create database alx_book_store: {e}")
+finally:
+    alx_cursor.close()
+    alx_db.close()
